@@ -142,7 +142,8 @@ fun HomeScreen(
                                 }
                             ) { },
                         categoryName = response.categoryName.toString(),
-                        note = response.note.toString()
+                        note = response.note.toString(),
+                        date = response.date.toString()
                     )
                 }
             } else {
@@ -157,7 +158,8 @@ fun HomeScreen(
                                 }
                             ) { },
                         categoryName = response.categoryName.toString(),
-                        note = response.note.toString()
+                        note = response.note.toString(),
+                        date = response.date.toString()
                     )
                 }
             }
@@ -203,6 +205,7 @@ fun HomeScreen(
             onDelete = {
                 viewModel.deleteNotes(deleteNote, categoryName = deleteCategory)
                 deleteNoteClick = !deleteNoteClick
+                viewModel.listOfFilter.clear()
             },
             onCancel = {
                 deleteNoteClick = !deleteNoteClick
@@ -349,7 +352,8 @@ fun DeleteCategory(
 fun NoteCard(
     modifier: Modifier = Modifier,
     categoryName: String,
-    note: String
+    note: String,
+    date: String
 ) {
     Card(
         modifier = modifier
@@ -359,6 +363,8 @@ fun NoteCard(
         Column(
             modifier = Modifier.padding(10.dp)
         ) {
+            Text(text = "created on $date", color = Color.Black)
+            Spacer(modifier = Modifier.size(10.dp))
             Text(text = categoryName, color = Color.Black.copy(alpha = 0.40f))
             Spacer(modifier = Modifier.size(10.dp))
             Text(text = note, color = Color.Black)

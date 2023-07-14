@@ -36,6 +36,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.sudarshan.dailynotes.data.model.NewNoteData
+import java.text.SimpleDateFormat
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -157,9 +159,13 @@ fun CreateNotesScreen(
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally),
             onClick = {
+                val date = Date(System.currentTimeMillis())
+                val format = SimpleDateFormat("dd.MM.yyyy")
+                val createdDate = format.format(date)
                 val newNote = NewNoteData(
                     categoryName = viewModel.categoryName,
-                    note = note
+                    note = note,
+                    date = createdDate
                 )
                 viewModel.addNewNote(newNote, viewModel.categoryName)
                 onAddClick()
